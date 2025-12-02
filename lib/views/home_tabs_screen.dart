@@ -17,7 +17,7 @@ class HomeTabsScreen extends StatelessWidget {
           title: const Text("TalentMatch"),
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.block), text: "Rejected"),
+              Tab(icon: Icon(Icons.thumb_down), text: "Dislike"),
               Tab(icon: Icon(Icons.search), text: "Explore"),
               Tab(icon: Icon(Icons.favorite), text: "Favorites"),
               Tab(icon: Icon(Icons.check_circle), text: "Applied"),
