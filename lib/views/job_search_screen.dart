@@ -1,6 +1,6 @@
-// lib/views/job_search_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import '../models/job.dart';
 import '../viewmodels/job_view_model.dart';
 import '../widgets/job_card.dart';
@@ -12,22 +12,22 @@ class JobSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<JobViewModel>(context); // listen: true
-    final TextEditingController _searchController = TextEditingController();
+    final viewModel = Provider.of<JobViewModel>(context);
+    final l10n = AppLocalizations.of(context)!;
+    final TextEditingController searchController = TextEditingController();
 
     return Column(
       children: [
-        // Search bar + resume upload
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
               Expanded(
                 child: TextField(
-                  controller: _searchController,
+                  controller: searchController,
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    hintText: "Search jobs...",
+                    hintText: l10n.searchJobs,
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -43,13 +43,13 @@ class JobSearchScreen extends StatelessWidget {
               const SizedBox(width: 8),
               IconButton(
                 icon: const Icon(Icons.upload_file, size: 28),
-                tooltip: "Upload Resume",
+                tooltip: l10n.uploadResume,
                 onPressed: () async {
                   final resumeText = await parseResumeFile();
                   if (resumeText != null) {
                     await viewModel.uploadResume(resumeText);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Resume uploaded successfully!")),
+                      SnackBar(content: Text(l10n.resumeUploaded)),
                     );
                   }
                 },
@@ -57,18 +57,15 @@ class JobSearchScreen extends StatelessWidget {
             ],
           ),
         ),
-
-        // Job list with swipe gestures
         Expanded(
           child: viewModel.isLoading
               ? const Center(child: CircularProgressIndicator())
               : viewModel.jobs.isEmpty
-                  ? const Center(child: Text("No jobs found"))
+                  ? Center(child: Text(l10n.noJobsFound))
                   : ListView.builder(
                       itemCount: viewModel.jobs.length,
                       itemBuilder: (context, index) {
                         final job = viewModel.jobs[index];
-
                         return JobCardWrapper(job: job);
                       },
                     ),
@@ -108,26 +105,24 @@ class _JobCardWrapperState extends State<JobCardWrapper> {
       onDismissed: (direction) {
         setState(() {
           if (direction == DismissDirection.startToEnd) {
-            viewModel.acceptJob(widget.job); // swipe right → favorite
+            viewModel.acceptJob(widget.job);
           } else if (direction == DismissDirection.endToStart) {
-            viewModel.rejectJob(widget.job); // swipe left → reject
+            viewModel.rejectJob(widget.job);
           }
         });
       },
       child: JobCard(
         job: widget.job,
         onTap: () async {
-          // Open details and rebuild on return
           await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (_) => JobDetailsScreen(job: widget.job),
             ),
           );
-          setState(() {}); // Force rebuild to update background
+          setState(() {});
         },
       ),
     );
   }
 }
-

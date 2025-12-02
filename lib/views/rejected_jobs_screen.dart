@@ -1,6 +1,6 @@
-// lib/views/rejected_jobs_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import '../viewmodels/job_view_model.dart';
 import '../widgets/job_list.dart';
 import 'job_details_screen.dart';
@@ -11,6 +11,7 @@ class RejectedJobsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<JobViewModel>(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return JobList(
       jobs: viewModel.rejectedJobs,
@@ -21,11 +22,11 @@ class RejectedJobsScreen extends StatelessWidget {
         ),
       ),
       firstButtonCallback: (job) => viewModel.moveToAccepted(job),
-      firstButtonLabel: "Favorite",
+      firstButtonLabel: l10n.favorite,
       firstButtonIcon: Icons.favorite,
       firstButtonColor: Colors.lightGreen,
       secondButtonCallback: (job) => viewModel.deleteRejected(job),
-      secondButtonLabel: "Delete",
+      secondButtonLabel: l10n.delete,
       secondButtonIcon: Icons.delete,
       secondButtonColor: Colors.red,
     );

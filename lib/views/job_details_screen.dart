@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/job.dart';
 import '../viewmodels/job_view_model.dart';
@@ -26,6 +27,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   Widget build(BuildContext context) {
     final job = widget.job;
     final viewModel = Provider.of<JobViewModel>(context);
+    final l10n = AppLocalizations.of(context)!;
 
     final full = job.description;
     final short =
@@ -41,45 +43,35 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             children: [
               if (job.logo != null)
                 Center(child: Image.network(job.logo!, height: 80)),
-
               const SizedBox(height: 10),
               Text(
                 job.employer,
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 8),
               Text(
-                "Relevance: ${job.relevance}%",
+                l10n.relevance(job.relevance),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 20),
               Text(showMore ? full : short, style: const TextStyle(fontSize: 16)),
-
               if (full.length > 200)
                 TextButton(
                   onPressed: () => setState(() => showMore = !showMore),
-                  child: Text(showMore ? "Show Less" : "Show More 🔽"),
+                  child: Text(showMore ? l10n.showLess : l10n.showMore),
                 ),
-
               const SizedBox(height: 20),
-
               Row(
                 children: [
-                  // APPLY BUTTON
                   Expanded(
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.launch),
-                      label: const Text("Apply"),
+                      label: Text(l10n.apply),
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                       onPressed: () => _applyToJob(job.applyLink),
                     ),
                   ),
-
                   const SizedBox(width: 12),
-
-                  // MARK APPLIED BUTTON (TOGGLE)
                   Expanded(
                     child: ElevatedButton.icon(
                       icon: Icon(
@@ -87,7 +79,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ? Icons.check_circle
                             : Icons.check_circle_outline,
                       ),
-                      label: Text(job.hasApplied ? "Applied" : "Mark Applied"),
+                      label: Text(job.hasApplied ? l10n.appliedStatus : l10n.markApplied),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             job.hasApplied ? Colors.green : Colors.grey,

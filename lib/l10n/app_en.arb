@@ -1,0 +1,32 @@
+{
+  "@@locale": "en",
+  "appTitle": "TalentMatch",
+  "dislike": "Dislike",
+  "explore": "Explore",
+  "favorites": "Favorites",
+  "applied": "Applied",
+  "welcomeTitle": "Welcome to TalentMatch!",
+  "welcomeMessage": "• Upload your resume\n• Explore job listings\n--> Swipe right to favorite\n<-- Swipe left to dislike\n\nTalentMatch ranks jobs based on your resume.",
+  "gotIt": "Got it",
+  "searchJobs": "Search jobs...",
+  "uploadResume": "Upload Resume",
+  "resumeUploaded": "Resume uploaded successfully!",
+  "noJobsFound": "No jobs found",
+  "relevance": "Relevance: {percent}%",
+  "@relevance": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "apply": "Apply",
+  "markApplied": "Mark Applied",
+  "appliedStatus": "Applied",
+  "unapply": "Unapply",
+  "delete": "Delete",
+  "favorite": "Favorite",
+  "showMore": "Show More 🔽",
+  "showLess": "Show Less",
+  "button": "Button"
+}

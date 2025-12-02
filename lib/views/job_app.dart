@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import 'home_tabs_screen.dart';
 
 class JobApp extends StatefulWidget {
@@ -10,7 +11,6 @@ class JobApp extends StatefulWidget {
 }
 
 class _JobAppState extends State<JobApp> {
-
   @override
   void initState() {
     super.initState();
@@ -25,20 +25,16 @@ class _JobAppState extends State<JobApp> {
 
     if (hasSeen || !mounted) return;
 
+    final l10n = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text("Welcome to TalentMatch!"),
-        content: const Text(
-          "• Upload your resume\n"
-          "• Explore job listings\n"
-          "--> Swipe right to favorite\n"
-          "<-- Swipe left to dislike\n\n"
-          "TalentMatch ranks jobs based on your resume."
-        ),
+        title: Text(l10n.welcomeTitle),
+        content: Text(l10n.welcomeMessage),
         actions: [
           TextButton(
-            child: const Text("Got it"),
+            child: Text(l10n.gotIt),
             onPressed: () async {
               await prefs.setBool('hasSeenIntro', true);
               Navigator.pop(context);
@@ -51,6 +47,6 @@ class _JobAppState extends State<JobApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeTabsScreen(); // <-- no MaterialApp here
+    return const HomeTabsScreen();
   }
 }

@@ -1,5 +1,5 @@
-// lib/widgets/job_list.dart
 import 'package:flutter/material.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import '../models/job.dart';
 import 'job_card.dart';
 
@@ -31,7 +31,9 @@ class JobList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (jobs.isEmpty) return const Center(child: Text("No jobs found"));
+    final l10n = AppLocalizations.of(context)!;
+    
+    if (jobs.isEmpty) return Center(child: Text(l10n.noJobsFound));
 
     return ListView.builder(
       itemCount: jobs.length,

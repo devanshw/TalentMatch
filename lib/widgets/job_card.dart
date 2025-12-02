@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:talent_match/l10n/app_localizations.dart';
 import '../models/job.dart';
 
 class JobCard extends StatelessWidget {
   final Job job;
   final VoidCallback onTap;
-
-  // First (left) button
   final VoidCallback? firstButtonCallback;
   final String? firstButtonLabel;
   final IconData? firstButtonIcon;
   final Color? firstButtonColor;
-
-  // Second (right) button
   final VoidCallback? secondButtonCallback;
   final String? secondButtonLabel;
   final IconData? secondButtonIcon;
@@ -33,16 +30,16 @@ class JobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Widget> buttons = [];
 
-    // First button
     if (firstButtonCallback != null) {
       buttons.add(
         Expanded(
           child: ElevatedButton.icon(
             onPressed: firstButtonCallback,
             icon: Icon(firstButtonIcon ?? Icons.check),
-            label: Text(firstButtonLabel ?? "Button"),
+            label: Text(firstButtonLabel ?? l10n.button),
             style: ElevatedButton.styleFrom(
               backgroundColor: firstButtonColor ?? Colors.green,
             ),
@@ -51,19 +48,17 @@ class JobCard extends StatelessWidget {
       );
     }
 
-    // Spacer if both buttons exist
     if (secondButtonCallback != null && buttons.isNotEmpty) {
       buttons.add(const SizedBox(width: 12));
     }
 
-    // Second button
     if (secondButtonCallback != null) {
       buttons.add(
         Expanded(
           child: ElevatedButton.icon(
             onPressed: secondButtonCallback,
             icon: Icon(secondButtonIcon ?? Icons.close),
-            label: Text(secondButtonLabel ?? "Button"),
+            label: Text(secondButtonLabel ?? l10n.button),
             style: ElevatedButton.styleFrom(
               backgroundColor: secondButtonColor ?? Colors.red,
             ),
@@ -81,7 +76,6 @@ class JobCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Logo + Title Row
               Row(
                 children: [
                   job.logo != null
@@ -103,26 +97,17 @@ class JobCard extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 6),
-
-              // Employer
               Text(
                 job.employer,
                 style: const TextStyle(color: Colors.grey),
               ),
-
               const SizedBox(height: 6),
-
-              // Relevance
               Text(
-                "Relevance: ${job.relevance}%",
+                l10n.relevance(job.relevance),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 12),
-
-              // Buttons row
               if (buttons.isNotEmpty) Row(children: buttons),
             ],
           ),

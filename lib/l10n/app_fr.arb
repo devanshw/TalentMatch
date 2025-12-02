@@ -1,0 +1,26 @@
+{
+  "@@locale": "fr",
+  "appTitle": "TalentMatch",
+  "dislike": "Je n'aime pas",
+  "explore": "Explorer",
+  "favorites": "Favoris",
+  "applied": "Postulé",
+  "welcomeTitle": "Bienvenue sur TalentMatch!",
+  "welcomeMessage": "• Téléchargez votre CV\n• Explorez les offres d'emploi\n--> Balayez à droite pour favori\n<-- Balayez à gauche pour je n'aime pas\n\nTalentMatch classe les emplois selon votre CV.",
+  "gotIt": "Compris",
+  "searchJobs": "Rechercher des emplois...",
+  "uploadResume": "Télécharger le CV",
+  "resumeUploaded": "CV téléchargé avec succès!",
+  "noJobsFound": "Aucun emploi trouvé",
+  "relevance": "Pertinence: {percent}%",
+  "apply": "Postuler",
+  "markApplied": "Marquer comme Postulé",
+  "appliedStatus": "Postulé",
+  "unapply": "Annuler",
+  "delete": "Supprimer",
+  "favorite": "Favori",
+  "showMore": "Voir Plus 🔽",
+  "showLess": "Voir Moins",
+  "button": "Bouton"
+}
+
