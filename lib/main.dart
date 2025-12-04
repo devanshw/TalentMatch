@@ -5,6 +5,7 @@ import 'package:talent_match/l10n/app_localizations.dart';
 import 'viewmodels/job_view_model.dart';
 import 'services/job_api_service.dart';
 import 'views/job_app.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(
@@ -42,6 +43,7 @@ class MyRootApp extends StatelessWidget {
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme, // ⬅️ Apply theme here
       locale: localeProvider.locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,

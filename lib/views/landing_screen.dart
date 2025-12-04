@@ -179,10 +179,18 @@ class _LandingScreenState extends State<LandingScreen>
               ),
             ],
           ),
-          child: const Icon(
-            Icons.work_outline,
-            size: 60,
-            color: Colors.blue,
+          child: ClipOval(
+            child: Image.asset(
+              'lib/assets/images/logo.png',
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Icon(
+                Icons.work_outline,
+                size: 60,
+                color: Colors.blue,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 24),

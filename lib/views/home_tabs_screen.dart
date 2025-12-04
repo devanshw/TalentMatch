@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:talent_match/l10n/app_localizations.dart';
-import '../main.dart';
+import '../theme/app_theme.dart';
 import 'job_search_screen.dart';
 import 'accepted_jobs_screen.dart';
 import 'rejected_jobs_screen.dart';
@@ -12,44 +10,67 @@ class HomeTabsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final localeProvider = Provider.of<LocaleProvider>(context);
-
     return DefaultTabController(
       length: 4,
-      initialIndex: 1,
+      initialIndex: 1, // Explore stays centered
       child: Scaffold(
         appBar: AppBar(
-          title: Text(l10n.appTitle),
-          actions: [
-            PopupMenuButton<Locale>(
-              icon: const Icon(Icons.language),
-              onSelected: (Locale locale) {
-                localeProvider.setLocale(locale);
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<Locale>>[
-                const PopupMenuItem<Locale>(
-                  value: Locale('en'),
-                  child: Text('English'),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const PopupMenuItem<Locale>(
-                  value: Locale('es'),
-                  child: Text('Español'),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.asset(
+                    'lib/assets/images/logo.png',
+                    width: 28,
+                    height: 28,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => 
+                      const Icon(Icons.work_outline, size: 24),
+                  ),
                 ),
-                const PopupMenuItem<Locale>(
-                  value: Locale('fr'),
-                  child: Text('Français'),
-                ),
-              ],
-            ),
-          ],
-          bottom: TabBar(
-            tabs: [
-              Tab(icon: const Icon(Icons.thumb_down), text: l10n.dislike),
-              Tab(icon: const Icon(Icons.search), text: l10n.explore),
-              Tab(icon: const Icon(Icons.favorite), text: l10n.favorites),
-              Tab(icon: const Icon(Icons.check_circle), text: l10n.applied),
+              ),
+              const SizedBox(width: 12),
+              const Text("TalentMatch"),
             ],
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: AppTheme.primaryGradient,
+            ),
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+              child: const TabBar(
+                indicatorColor: Colors.white,
+                indicatorWeight: 3,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white70,
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+                tabs: [
+                  Tab(icon: Icon(Icons.thumb_down, size: 22), text: "Dislike"),
+                  Tab(icon: Icon(Icons.explore, size: 22), text: "Explore"),
+                  Tab(icon: Icon(Icons.favorite, size: 22), text: "Favorites"),
+                  Tab(icon: Icon(Icons.check_circle, size: 22), text: "Applied"),
+                ],
+              ),
+            ),
           ),
         ),
         body: const TabBarView(
