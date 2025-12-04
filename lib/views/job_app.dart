@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talent_match/l10n/app_localizations.dart';
 import 'home_tabs_screen.dart';
+import 'landing_screen.dart';
 
 class JobApp extends StatefulWidget {
   const JobApp({super.key});
@@ -11,42 +11,34 @@ class JobApp extends StatefulWidget {
 }
 
 class _JobAppState extends State<JobApp> {
+  bool _hasSeenIntro = false;
+  bool _isLoading = true;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showIntroPopup();
-    });
+    _checkIfSeenIntro();
   }
 
-  Future<void> _showIntroPopup() async {
+  Future<void> _checkIfSeenIntro() async {
     final prefs = await SharedPreferences.getInstance();
-    final hasSeen = false;
+    final hasSeen = prefs.getBool('hasSeenIntro') ?? false;
 
-    if (hasSeen || !mounted) return;
+    setState(() {
+      _hasSeenIntro = hasSeen;
+      _isLoading = false;
+    });
 
-    final l10n = AppLocalizations.of(context)!;
-
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(l10n.welcomeTitle),
-        content: Text(l10n.welcomeMessage),
-        actions: [
-          TextButton(
-            child: Text(l10n.gotIt),
-            onPressed: () async {
-              await prefs.setBool('hasSeenIntro', true);
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
+    // Mark as seen after showing landing screen
+    if (!hasSeen) {
+      await prefs.setBool('hasSeenIntro', true);
+    }
   }
 
+  
   @override
   Widget build(BuildContext context) {
-    return const HomeTabsScreen();
+    // Always show landing screen
+    return const LandingScreen();
   }
 }
