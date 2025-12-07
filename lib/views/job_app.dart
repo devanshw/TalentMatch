@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home_tabs_screen.dart';
 import 'landing_screen.dart';
 
 class JobApp extends StatefulWidget {
@@ -11,8 +10,6 @@ class JobApp extends StatefulWidget {
 }
 
 class _JobAppState extends State<JobApp> {
-  bool _hasSeenIntro = false;
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -25,8 +22,6 @@ class _JobAppState extends State<JobApp> {
     final hasSeen = prefs.getBool('hasSeenIntro') ?? false;
 
     setState(() {
-      _hasSeenIntro = hasSeen;
-      _isLoading = false;
     });
 
     // Mark as seen after showing landing screen
