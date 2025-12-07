@@ -44,6 +44,16 @@ TalentMatch uses **resume analysis** to calculate how well each job matches your
 
 ---
 
+<p align="center">
+  <img src="lib/assets/images/home.png" width="250">
+  <img src="lib/assets/images/listview.png" width="250">
+  <img src="lib/assets/images/singleview.png" width="250">
+</p>
+
+
+
+---
+
 ## MVVM architecture
 
 The MVVM (Model–View–ViewModel) architecture in TalentMatch cleanly separates the UI from application logic, making the app easier to scale and maintain. Views are responsible only for displaying the interface and capturing user interactions such as swipes, taps, or searches. They never contain business logic; instead, they forward all actions to ViewModels, which manage state, run the core logic (like fetching jobs, parsing resumes, and computing relevance scores), and notify the UI when updates occur through the Provider ChangeNotifier pattern. The Models and Services layer handles data storage, API communication, resume parsing, and similarity computations. With this structure, each layer has a single responsibility: Views render, ViewModels decide, and Models provide data creating a clean, reactive workflow where UI updates automatically whenever the underlying data changes.
