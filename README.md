@@ -128,7 +128,7 @@ The MVVM (Model–View–ViewModel) architecture in TalentMatch cleanly separate
 │  • ResumeParser           - Extract text from files             │
 │    └── parseResumeFile() -> String?                            │
 │                                                                  │
-│  • SimilarityService      - AI matching algorithm               │
+│  • SimilarityService      - matching algorithm               │
 │    ├── termFrequency(text) -> Map<String, double>              │
 │    ├── cosineSimilarity(a, b) -> double                        │
 │    └── relevanceScore(resume, jobDesc) -> int                  │
