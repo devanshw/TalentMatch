@@ -1,5 +1,7 @@
 # TalentMatch
 
+group members - Devansh Waleacha and Aaron Huynh
+
 **Find Your Perfect Job Match with AI-Powered Relevance Scoring**
 
 TalentMatch is a modern Flutter mobile application that revolutionizes job searching by using intelligent resume matching to rank job opportunities. Swipe through job listings Tinder-style, upload your resume for personalized relevance scores, and organize opportunities into favorites, applied, and rejected categories.
